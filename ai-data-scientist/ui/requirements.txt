@@ -1,0 +1,9 @@
+chainlit
+pydantic
+pydantic-core
+sniffio
+asyncer
+pandas
+numpy
+plotly
+httpx
