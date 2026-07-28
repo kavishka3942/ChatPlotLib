@@ -1,0 +1,18 @@
+   syntax = "proto3";
+   package executor;
+
+   service CodeExecutor {
+     rpc ExecuteCode (CodeRequest) returns (CodeResponse);
+   }
+
+   message CodeRequest {
+     string code = 1;
+     map<string, string> environment_vars = 2;
+   }
+
+   message CodeResponse {
+     string stdout = 1;
+     string stderr = 2;
+     string plotly_json = 3;
+     bool success = 4;
+   }
