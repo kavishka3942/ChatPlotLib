@@ -1,0 +1,32 @@
+# ==========================================
+# Core Data Manipulation
+# ==========================================
+pandas
+numpy
+polars
+
+# ==========================================
+# Visualization (Must output JSON/HTML for Plotly)
+# ==========================================
+plotly
+matplotlib
+seaborn
+
+# ==========================================
+# Machine Learning & Statistics
+# ==========================================
+
+scikit-learn
+scipy
+#xgboost
+statsmodels
+
+
+# ==========================================
+# Data Cleaning & Utilities
+# ==========================================
+missingno
+pyarrow  # For fast parquet/csv reading
+grpcio
+grpcio-tools
+protobuf
