@@ -1,25 +1,25 @@
-from ollama import AsyncClient
+from langchain_ollama import ChatOllama
 import requests
-import json
+import os
 
 async def call_ollama(message: str):
     """
-    Asynchronous Ollama caller.
+    Asynchronous Ollama caller using LangChain's ChatOllama.
     """
-    message_payload = {'role': 'user', 'content': message}
-        
-    client = AsyncClient(host='http://host.docker.internal:11434') # Points to your local Ollama
+    ollama_url = os.getenv("OLLAMA_BASE_URL", "http://localhost:11434")
+    ollama_model = os.getenv("OLLAMA_MODEL", "qwen2.5vl:3b")
+    
+    llm = ChatOllama(
+        base_url=ollama_url,
+        model=ollama_model,
+        temperature=0.0,
+        num_ctx=8192,
+        num_predict=512,
+    )
+    
     try:
-        response = await client.chat(
-            model='qwen2.5vl:3b', # Changed to standard qwen2.5:3b (adjust if you specifically need the vl version)
-            messages=[message_payload],
-            options={
-                "num_ctx": 8192,
-                "num_predict": 512,
-                "temperature": 0.0,
-            }
-        )
-        return response['message']['content']
+        response = await llm.ainvoke(message)
+        return response.content
     except requests.exceptions.RequestException as e:
         return f"Error connecting to Ollama: {str(e)}. Make sure Ollama is running on your host machine."
     except Exception as e:

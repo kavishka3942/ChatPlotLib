@@ -27,6 +27,7 @@ statsmodels
 # ==========================================
 missingno
 pyarrow  # For fast parquet/csv reading
+boto3
 grpcio
 grpcio-tools
 protobuf
