@@ -84,10 +84,13 @@ async def code_generator_node(state: AgentState):
 
     load_instruction = ""
     if filename:
+        import os
+        uploads_dir = os.path.abspath(os.path.join(os.path.dirname(__file__), "..", "..", "uploads"))
+        filepath = os.path.join(uploads_dir, filename).replace('\\', '/')
         if filename.endswith(".csv"):
-            load_instruction = f"To load the dataset, read it directly: df = pd.read_csv('{filename}')"
+            load_instruction = f"To load the dataset, read it directly: df = pd.read_csv('{filepath}')"
         elif filename.endswith((".xls", ".xlsx")):
-            load_instruction = f"To load the dataset, read it directly: df = pd.read_excel('{filename}')"
+            load_instruction = f"To load the dataset, read it directly: df = pd.read_excel('{filepath}')"
 
     if state.get("needs_plot"):
         plot_rule = "2. The user has requested a visualization. You MUST create a plot and assign the Plotly Figure object to a global variable named fig."
